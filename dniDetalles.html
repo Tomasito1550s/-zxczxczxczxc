@@ -18,7 +18,7 @@
     .header {
         display: flex;
         align-items: center;
-        background-color: #337ab7;
+        background-color: #362FC1;
         padding: 10px;
         color: white;
         justify-content: space-between;
@@ -306,6 +306,16 @@ function terminoCargar() {
             document.getElementById("cardEntera").style.display = "block";
             document.getElementById("loader").style.display = "none";
         }
+
+    const file = document.getElementById('profilePictureInput').files[0]; // Asegúrate de que este elemento exista y esté capturando el archivo correctamente.
+    const userId = firebase.auth().currentUser.uid; // Obtiene el ID del usuario autenticado
+    const storageRef = firebase.storage().ref('profile_pictures/' + userId + '/' + file.name);
+
+    storageRef.put(file).then((snapshot) => {
+      console.log('Imagen de perfil subida con éxito');
+    }).catch((error) => {
+      console.error('Error subiendo la imagen de perfil:', error);
+    });
 </script>
 
 </body>
